@@ -2,25 +2,16 @@
 <head>
 <style>
 .center {
-    margin: auto;
-    width: 20%;
-    left: auto;
-    top: auto;
     transform: translateY(100%);
 }
 
 .round {
-    width: 200%;
+    width: 50%;
     border-radius: 15px;
     border: 1px #000 solid;
-    padding: 5px 5px 5px 25px;
-    position: absolute;
-    top: auto;
-    margin: 0 auto;
-    display: block;
-    z-index: 100;
-    right: auto;
-    left: -50%;
+    transform: translateY(550%);
+    font-size: 25px;
+    box-sizing: border-box;
 }
 </style>
 </head>
@@ -29,14 +20,14 @@
 <div class="center">
         <center>
             <img width="200" height="200" src="/static/images/twitter.png">    
-                <center>
-                    <form action="/search" method="POST">
-                        <center>
-                            <input width="200" type="text" style="font-size: 25px;" id="query" name="query" class="round"><br><br>
-                        </center>
-                    </form>
-                </center>
         </center>
+</div>
+<div>
+    <center>
+        <form action="/search" method="POST">
+            <input width="200" type="text" id="query" name="query" class="round"><br><br>
+        </form>
+    </center>
 </div>
 
 
