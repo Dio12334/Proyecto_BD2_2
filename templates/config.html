@@ -1,0 +1,33 @@
+<head>
+<style>
+.config {
+    border: 2px gray;
+    transform: translateY(200%);
+    font-family: Arial;
+}
+
+.field {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+</style>
+</head>
+
+<body>
+     
+    <center>
+        <form action='/change_config' class="config" method="post">
+            <div class="field">
+                <label for="number_of_tweets_searched">Number of tweets searched: </label>
+                <input type="number" id="number_of_tweets_searched" name="number_of_tweets_searched"><br>
+            </div>
+            <div class="field">
+                <label for="number_of_tweets_per_page">Number of tweets per page: </label>
+                <input type="number" id="number_of_tweets_per_page" name="number_of_tweets_per_page"><br>
+            </div>
+            <div class="field">
+                <input type="submit" id="submit" name="submit" value="submit">
+            </div>
+        </form>
+    </center>
+</body>
