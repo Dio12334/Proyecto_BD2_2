@@ -37,18 +37,28 @@
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
     <script type="text/javascript">
-
         
-
 
         $.getJSON("/requestjson", function(data){
         for (var i = 0, len = data.length; i < len; i++) {
             var datax = data[i]
             $('body').append("<center> <div class=\"tweet\"> <div class=\"text\">@" + datax.username + "</div> <div class=\"text\">" + datax.content + "</div> <div class=\"text\">" + datax.date.substr(0,16) +  "</div> </div> </center>"); 
-        }  
+        }      
         }).fail(function(a,b,c){
             alert(a + " " + b + " " + c)
         });
+        
+        $( document ).ready(function() {
+            var number_of_pages = parseFloat(document.getElementById("nop").innerHTML);
+            console.log(number_of_pages);
+            $('body').append("<div>");
+            for (var i = 0, len=number_of_pages; i < Math.ceil(number_of_pages); i++){
+                $('body').append(i);
+                $('body').append(" ");
+            }
+            $('body').append("</div>");
+        });
+        
        
     </script>
 
@@ -63,12 +73,13 @@
     </div>    
     <div>
         <center>
-            <form action="/search" method="POST">
+            <form action="/search" method="GET">
                 <input width="200" type="text" id="query" name="query" class="round">
             </form>
+
         </center>  
-    </div>
-    
+    </div>   
+    <var id="nop"  hidden>{{number_of_pages}}</var>
 </body>
 
 
