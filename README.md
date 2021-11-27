@@ -236,7 +236,7 @@ Este es el tiempo de creación del indice invertido (1ms 40s 25ms).
 ### Queries benchmark
 Estos son los tiempos que nos tomó encontrar las siguientes busquedas:
 1. Cristiano Ronaldo (1s 99ms).
-2. Toni Kroos (2s 8ms).
+2. Toni Kroos (2s 08ms).
 3. Sheriff (1s 48ms).
 4. Manchester City (1s 92ms).
 ![](images/benchmarks_queries.png)
