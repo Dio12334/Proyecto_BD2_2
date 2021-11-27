@@ -1,17 +1,18 @@
 # Proyecto_BD2_2
 
 ## Archivos usados en memoria secundaria
-- resources/Data.json: Colección de máximo 20K tweets que fueron filtrados a través de una frase de consulta en la función change_index_theme
+- **resources/Data.json:** Colección de máximo 20K tweets que fueron filtrados a través de una frase de consulta en la función change_index_theme
 
-- resources/indexs: Carpeta donde se guardan los índices SPIMI locales que serán fusionados en la función merge. Siempre son 20 índices. Al unirlos en el índice final, son eliminados.
+- **resources/indexs:** Carpeta donde se guardan los índices SPIMI locales que serán fusionados en la función merge. Siempre son 20 índices. Al unirlos en el índice final, son eliminados.
 
-- resources/i_index.json: Índice Invertido final.
+- **resources/i_index.json:** Índice Invertido final.
 
-- resources/index.txt: Índice para poder ubicarnos en un tweet dada su posición lógica en la colección, ya que la API los guarda en espacios de longitud variable.
+- **resources/index.txt:** Índice para poder ubicarnos en un tweet dada su posición lógica en la colección, ya que la API los guarda en espacios de longitud variable.
 
-- resources/lengths.json: Archivo donde se guardan las longitudes de todos los tweets. Es imprescindible para la normalización al momento de realizar la similitud de coseno
+- **resources/lengths.json:** Archivo donde se guardan las longitudes de todos los tweets. Es imprescindible para la normalización al momento de realizar la similitud de coseno
 
-static/data/rpta.json: Archivo que contiene los K tweets más relevantes a la consulta del usuario, es decir, es el output de la función do_query.
+- **static/data/rpta.json:** Archivo que contiene los K tweets más relevantes a la consulta del usuario, es decir, es el output de la función do_query.
+
 ## Pasos del procesamiento de la query
 ### Crear el indice (por bloques)
 
