@@ -5,7 +5,7 @@
 
 Creamos el indice invertido a base de los datos en data.json 
 y guardamos los tokens y sus respectivos pesos DF y TF en un diccionario
-de diccionarios.
+de diccionarios. Esto corresponde a un sólo bloque de tweets.
 
 ```python
     def __build_inverted_index(self, n, block):
@@ -59,10 +59,13 @@ de diccionarios.
 ```
 ### Tokenizar la query
 
-Para la tokenización de la query hacemos uso de la librería nltk.
+Para la tokenización de la query hacemos uso de la librería nltk,
+cuya implementación soporta parcialmente consultas en el lenguaje
+español.
 Donde usamos las funciones encode, decode, stem, tokenize. Luego,
 procedemos a deshacernos de los stopwords con ayuda de la librería
 y nuestra lista de caracteres a no incluir.
+
 ```python
     def tokenize(self, tweet):
         tweet = tweet.encode('ascii', 'ignore').decode('ascii')
@@ -75,8 +78,11 @@ y nuestra lista de caracteres a no incluir.
 ```
 ### Aplicar cosenos
 
-Obtenemos la distancia de coseno de todos los tokens del query y 
-sumamos al documento en el indice invertido de dicho token.
+Obtenemos la distancia de coseno de la query y buscamos sus
+términos en el índice para aplicar el coseno a los tweets
+que contienen dichas palabras. También usamos el archivo
+lengths.json, el cual contiene los tamaños de los tweets, que
+fueron guardados en disco al crea los índices locales.
 
 ```python
     # Calculamos la distancia de coseno:
@@ -102,10 +108,10 @@ sumamos al documento en el indice invertido de dicho token.
         heappush(heap, (-1 * tweets[tweet], tweet))
 
 ```
-### Filtrar los mejores
-Después de tokenizar la query y calcular la distancia de coseno de
-ellas procedemos a ingresar todos los tweets en un max heap para que
-posteriormente podamos obtener los k tweets más relevantes.
+### Filtrar los k mejores tweets
+Después de procesar la query y calcular la distancia del coseno con respecto
+a los tweets de la colección, se filtran los k mejores tweets haciendo uso
+de un max heap con la distancia de coseno.
 
 ```python
 def process_query(query, k, n):
