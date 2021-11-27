@@ -1,5 +1,19 @@
 # Proyecto_BD2_2
 
+## ¿Como usar?
+Esta es la página principal donde podrá hacer las busquedas en la barra
+del medio y podrá acceder a la configuración presionando el engranaje
+de la derecha superior.
+![](images/Screenshot from 2021-11-27 15-59-07.png)
+
+
+En la configuración usted podrá definir la cantidad de tweets que se va
+a buscar, cuantos tweets aparecen por página, el contexto de los tweets 
+(se encarga de cargar todos los tweets a la base de datos que tengan ese contexto)
+ y el número total de tweets en la base de datos.
+![](images/Screenshot from 2021-11-27 16-08-28.png)
+
+
 ## Archivos usados en memoria secundaria
 - **resources/Data.json:** Colección de máximo size_tweets (el usuario puede modificar este número) tweets que fueron filtrados a través de una frase de consulta en la función change_index_theme
 
@@ -239,6 +253,8 @@ Estos son los tiempos que nos tomó encontrar las siguientes busquedas:
 2. Toni Kroos (2s 08ms).
 3. Sheriff (1s 48ms).
 4. Manchester City *(1s 92ms)*.
+
+Considerar que estos resultados fue con los mejores 10 tweets.
 ![](images/benchmarks_queries.png)
 ### Change index benchmark
 Este es el tiempo que toma el cambiar el contexto de los tweets a los
