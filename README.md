@@ -118,9 +118,12 @@ de un índice local y finalmente las fusiona para obtener el índice final en di
 
 Hacemos uso de la librería nltk, cuya implementación soporta parcialmente consultas 
 en el lenguaje español.
-De la libreríá, usamos las funciones encode, decode, stem, tokenize; todas ellas vistas
+De la librería, usamos las funciones encode, decode, stem (Snowball) y tokenize; todas ellas vistas
 ya previamente en el curso. Luego, procedemos a deshacernos de los stopwords. La propia
-nltk nos proporciona una lista de stopwords que, de acuerdo a sus estudios, es eficiente.
+nltk nos proporciona una lista de stopwords que, de acuerdo a sus estudios, es eficiente. Agregramos también
+algunos símbolos más, para un mejor filtrado.
+Debido a que un tweet no necesariamente se redacta formalmente, la librería nos proporciona un tweet tokenizer. Este
+tokenizer preserva, por ejemplo, los hashtags y los usernames. Esto nos permite soportar ese tipo de consultas.
 
 ```python
     def tokenize(self, tweet):
@@ -132,13 +135,14 @@ nltk nos proporciona una lista de stopwords que, de acuerdo a sus estudios, es e
                 ["<", ">", ",", "º", ":", ";", ".", "!", "¿", "?", ")", "(", "@", "'",'"','\"', '.', '...', '....']
         ]
 ```
+
 ### Similitud de cosenos
 
 Obtenemos la distancia de coseno de la query y buscamos sus
 términos en el índice para hacer lo mismo con los tweets
 que contienen las palabras de la query. Además del índice, usamos el archivo
 lengths.json, el cual contiene los tamaños de los tweets, que
-fueron guardados en disco al crea los índices locales.
+fueron guardados en disco al crear los índices locales.
 Gracias a ello es posible normalizar los tweets.
 
 ```python
