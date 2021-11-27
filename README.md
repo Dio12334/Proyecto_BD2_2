@@ -1,5 +1,9 @@
 # Proyecto_BD2_2
 
+## Demostración
+
+https://www.youtube.com/watch?v=mieGBLWa0Cc
+
 ## ¿Como usar?
 Esta es la página principal. La barra del medio le permite buscar una frase en lenguaje natural
 en una colección de tweets. Los tweets recuperados estan rankeados con la similitud de coseno.
