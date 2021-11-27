@@ -1,5 +1,17 @@
 # Proyecto_BD2_2
 
+## Archivos usados en memoria secundaria
+- resources/Data.json: Colección de máximo 20K tweets que fueron filtrados a través de una frase de consulta en la función change_index_theme
+
+- resources/indexs: Carpeta donde se guardan los índices SPIMI locales que serán fusionados en la función merge. Siempre son 20 índices. Al unirlos en el índice final, son eliminados.
+
+- resources/i_index.json: Índice Invertido final.
+
+- resources/index.txt: Índice para poder ubicarnos en un tweet dada su posición lógica en la colección, ya que la API los guarda en espacios de longitud variable.
+
+- resources/lengths.json: Archivo donde se guardan las longitudes de todos los tweets. Es imprescindible para la normalización al momento de realizar la similitud de coseno
+
+static/data/rpta.json: Archivo que contiene los K tweets más relevantes a la consulta del usuario, es decir, es el output de la función do_query.
 ## Pasos del procesamiento de la query
 ### Crear el indice (por bloques)
 
@@ -54,6 +66,46 @@ de diccionarios. Esto corresponde a un sólo bloque de tweets.
         lengths_file = open('resources/lengths.json', 'a', newline='\n', encoding='utf8')
         lengths_file.truncate(0)
         lengths_file.write(json.dumps(lengths, ensure_ascii=False, default=str))
+        return
+
+```
+Recibe los n bloques que se particionarion en la función anterior y
+devuelve el índice invertido final (La unión de todos loa índices
+intermedios)
+```python
+    def __merge(self):
+        inverted_index = {}
+
+        # Lectura de los índices temporales
+        for local_index in glob('resources/indexs/*.json'):
+            with open(local_index, "r") as index:
+                local_dict = json.loads(index.readline())
+            
+            # Colocamos las frecuencias
+            for k in local_dict.keys():
+                if k not in inverted_index.keys():
+                    inverted_index[k] = local_dict[k]
+                else:
+                    # Dado que cada tweet se revisa secuencialmente, no hay colisiones en los TF
+                    inverted_index[k]['TF'] += (local_dict[k]['TF'])
+                    # Se suman las frecuencias de documentos
+                    inverted_index[k]['DF'] += (local_dict[k]['DF'])
+            os.remove(local_index)
+
+        # Escribimos el índice completo
+        json_file = open('resources/i_index.json', 'a', newline='\n', encoding='utf8')
+        json_file.truncate(0)
+        json_file.write(json.dumps(inverted_index, ensure_ascii=False, default=str))
+        return
+```
+Define las particiones y, ysa las funciones anteriores para construir  
+el índice invertido final
+
+```python
+    def BSBI_builder(self):
+        block = int(size_tweets / 20)
+        self.__build_inverted_index(size_tweets, block)
+        self.__merge()
         return
 
 ```
