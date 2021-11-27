@@ -1,7 +1,7 @@
 # Proyecto_BD2_2
 
 ## Archivos usados en memoria secundaria
-- **resources/Data.json:** Colección de máximo 20K tweets que fueron filtrados a través de una frase de consulta en la función change_index_theme
+- **resources/Data.json:** Colección de máximo size_tweets (el usuario puede modificar este número) tweets que fueron filtrados a través de una frase de consulta en la función change_index_theme
 
 - **resources/indexs:** Carpeta donde se guardan los índices SPIMI locales que serán fusionados en la función merge. Siempre son 20 índices. Al unirlos en el índice final, son eliminados.
 
