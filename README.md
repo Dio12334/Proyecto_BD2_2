@@ -1,16 +1,16 @@
 # Proyecto_BD2_2
 
 ## ¿Como usar?
-Esta es la página principal donde podrá hacer las busquedas en la barra
-del medio y podrá acceder a la configuración presionando el engranaje
-de la derecha superior.
+Esta es la página principal. La barra del medio le permite buscar tweets
+rankeados por el algoritmo de similitud de coseno.
 ![](images/Screenshot%20from%202021-11-27%2015-59-07.png)
 
 
-En la configuración usted podrá definir la cantidad de tweets que se va
-a buscar, cuantos tweets aparecen por página, el contexto de los tweets 
-(se encarga de cargar todos los tweets a la base de datos que tengan ese contexto)
- y el número total de tweets en la base de datos.
+En la configuración usted podrá definir: la cantidad de tweets máxima que se
+van a recuperar y cuantos tweets aparecerán por página. También puede modifcar
+la base de datos cambiando el contexto de los tweets (realizado mediante una frase 
+de consulta: todos los tweets contendran esa frase) y el número total de tweets que
+se guardarán de dicho contexto, en disco.
 ![](images/Screenshot%20from%202021-11-27%2016-08-28.png)
 
 
@@ -248,7 +248,7 @@ Considerando la suma de los tiempos de user y system, se obtuvieron los siguient
 Este es el tiempo de creación del indice invertido (1ms 40s 25ms).
 ![](images/benchmark_buildindex.png)
 ### Queries benchmark
-Estos son los tiempos que nos tomó encontrar las siguientes busquedas:
+Estos son los tiempos que nos tomó encontrar las siguientes busquedas (k=10):
 1. Cristiano Ronaldo (1s 99ms).
 2. Toni Kroos (2s 08ms).
 3. Sheriff (1s 48ms).
