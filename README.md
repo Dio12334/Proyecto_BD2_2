@@ -1,8 +1,8 @@
 # Proyecto_BD2_2
 
 ## ¿Como usar?
-Esta es la página principal. La barra del medio le permite buscar tweets
-rankeados por el algoritmo de similitud de coseno.
+Esta es la página principal. La barra del medio le permite buscar una frase en lenguaje natural
+en una colección de tweets. Los tweets recuperados estan rankeados con la similitud de coseno.
 ![](images/Screenshot%20from%202021-11-27%2015-59-07.png)
 
 
@@ -252,11 +252,10 @@ Estos son los tiempos que nos tomó encontrar las siguientes busquedas (k=10):
 1. Cristiano Ronaldo (1s 99ms).
 2. Toni Kroos (2s 08ms).
 3. Sheriff (1s 48ms).
-4. Manchester City *(1s 92ms)*.
+4. Manchester City (1s 92ms).
 
-Considerar que estos resultados fue con los mejores 10 tweets.
+Considerar que para esta consulta se filtraron los 10 mejores tweets.
 ![](images/benchmarks_queries.png)
 ### Change index benchmark
-Este es el tiempo que toma el cambiar el contexto de los tweets a los
-que se le van a hacer la busqueda (12m 17s 98ms).
+Este es el tiempo que toma el cambiar el contexto de los tweets (12m 17s 98ms).
 ![](images/benchmark_changeindex.png)
