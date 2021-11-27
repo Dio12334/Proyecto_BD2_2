@@ -13,7 +13,7 @@
 
 - **static/data/rpta.json:** Archivo que contiene los K tweets más relevantes a la consulta del usuario, es decir, es el output de la función do_query.
 
-## Pasos del procesamiento de la query
+## Indexación
 ### Crear el indice (por bloques)
 
 Creamos el indice invertido a base de los datos en data.json 
@@ -70,9 +70,10 @@ de diccionarios. Esto corresponde a un sólo bloque de tweets.
         return
 
 ```
-Recibe los n bloques que se particionarion en la función anterior y
-devuelve el índice invertido final (La unión de todos loa índices
-intermedios)
+### Fusión de los índices locales
+Recibe los n bloques que fueron convertidos a índices invertidos locales a través
+de la función anterior y los mezcla para escribir en un archivo el índice invertido
+final.
 ```python
     def __merge(self):
         inverted_index = {}
@@ -99,8 +100,10 @@ intermedios)
         json_file.write(json.dumps(inverted_index, ensure_ascii=False, default=str))
         return
 ```
-Define las particiones y, ysa las funciones anteriores para construir  
-el índice invertido final
+
+### BSBI
+Define el tamaño de las particiones, llama a cada una de ellas a usarse para la construcción
+de un índice local y finalmente las fusiona para obtener el índice final en disco.
 
 ```python
     def BSBI_builder(self):
@@ -110,14 +113,14 @@ el índice invertido final
         return
 
 ```
-### Tokenizar la query
+## Procesamiento de la query
+### Tokenización
 
-Para la tokenización de la query hacemos uso de la librería nltk,
-cuya implementación soporta parcialmente consultas en el lenguaje
-español.
-Donde usamos las funciones encode, decode, stem, tokenize. Luego,
-procedemos a deshacernos de los stopwords con ayuda de la librería
-y nuestra lista de caracteres a no incluir.
+Hacemos uso de la librería nltk, cuya implementación soporta parcialmente consultas 
+en el lenguaje español.
+De la libreríá, usamos las funciones encode, decode, stem, tokenize; todas ellas vistas
+ya previamente en el curso. Luego, procedemos a deshacernos de los stopwords. La propia
+nltk nos proporciona una lista de stopwords que, de acuerdo a sus estudios, es eficiente.
 
 ```python
     def tokenize(self, tweet):
@@ -129,13 +132,14 @@ y nuestra lista de caracteres a no incluir.
                 ["<", ">", ",", "º", ":", ";", ".", "!", "¿", "?", ")", "(", "@", "'",'"','\"', '.', '...', '....']
         ]
 ```
-### Aplicar cosenos
+### Similitud de cosenos
 
 Obtenemos la distancia de coseno de la query y buscamos sus
-términos en el índice para aplicar el coseno a los tweets
-que contienen dichas palabras. También usamos el archivo
+términos en el índice para hacer lo mismo con los tweets
+que contienen las palabras de la query. Además del índice, usamos el archivo
 lengths.json, el cual contiene los tamaños de los tweets, que
 fueron guardados en disco al crea los índices locales.
+Gracias a ello es posible normalizar los tweets.
 
 ```python
     # Calculamos la distancia de coseno:
@@ -162,7 +166,7 @@ fueron guardados en disco al crea los índices locales.
 
 ```
 ### Filtrar los k mejores tweets
-Después de procesar la query y calcular la distancia del coseno con respecto
+Después de procesar la query y calcular la similitud de coseno con respecto
 a los tweets de la colección, se filtran los k mejores tweets haciendo uso
 de un max heap con la distancia de coseno.
 
