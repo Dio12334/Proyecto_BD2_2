@@ -228,9 +228,9 @@ def process_query(query, k, n):
 
 ## Benchmarks
 
-### Build index benchmark
 Considerando la suma de los tiempos de user y system, se obtuvieron los siguientes resultados:
 
+### Build index benchmark
 Este es el tiempo de creación del indice invertido (1ms 40s 25ms).
 ![](images/benchmark_buildindex.png)
 ### Queries benchmark
