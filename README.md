@@ -3,6 +3,8 @@
 ## Pasos del procesamiento de la query
 ### Crear el indice (por bloques)
 
+
+
 ```python
     def __build_inverted_index(self, n, block):
         tw_index = 1
@@ -71,6 +73,8 @@ y nuestra lista de caracteres a no incluir.
 ```
 ### Aplicar cosenos
 
+Obtenemos la distancia de coseno de todos los tokens del query y 
+sumamos al documento en el indice invertido de dicho token.
 
 ```python
     # Calculamos la distancia de coseno:
@@ -152,3 +156,12 @@ def process_query(query, k, n):
     return retrieved
 
 ```
+
+## Benchmarks
+
+### Build index benchmark
+![](images/benchmark_buildindex.png)
+### Queries benchmark
+![](images/benchmarks_queries.png)
+### Change index benchmark
+![](images/benchmark_changeindex.png)
