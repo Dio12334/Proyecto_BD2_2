@@ -4,14 +4,14 @@
 Esta es la página principal donde podrá hacer las busquedas en la barra
 del medio y podrá acceder a la configuración presionando el engranaje
 de la derecha superior.
-![](images/Screenshot from 2021-11-27 15-59-07.png)
+![](images/Screenshot%20from%202021-11-27%2015-59-07.png)
 
 
 En la configuración usted podrá definir la cantidad de tweets que se va
 a buscar, cuantos tweets aparecen por página, el contexto de los tweets 
 (se encarga de cargar todos los tweets a la base de datos que tengan ese contexto)
  y el número total de tweets en la base de datos.
-![](images/Screenshot from 2021-11-27 16-08-28.png)
+![](images/Screenshot%20from%202021-11-27%2016-08-28.png)
 
 
 ## Archivos usados en memoria secundaria
