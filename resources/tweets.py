@@ -30,13 +30,13 @@ class creator_index:
             content = (tweet.content).replace("\n", " ").replace("\"","").replace("-"," ").replace('_'," ").replace('\\'," ").replace('\r'," ").replace('\t'," ")             
             my_details = {
                 'id': tweet.id,
-                'username' : tweet.user.username,
+                'username' : tweet.username,
                 'date' : tweet.date,
                 'content' : content,
                 'url' : tweet.url
             }
             index_file.write(str(format(cont, '09d')))
-            cont += 2 + 19 + len(tweet.user.username) + len(str(tweet.date)) + len(content) + len (tweet.url) + 27 + 4*6 + 4*2 +11 -9
+            cont += 2 + 19 + len(tweet.username) + len(str(tweet.date)) + len(content) + len (tweet.url) + 27 + 4*6 + 4*2 +11 -9
             json_file.write(json.dumps(my_details, ensure_ascii=False, default=str))
             index_file.write('\n')
             json_file.write('\n') 

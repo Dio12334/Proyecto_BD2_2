@@ -1,4 +1,5 @@
 <head>
+<title>Twitter cosine search</title>
 <style>
 .config {
     border: 2px gray;
@@ -19,11 +20,19 @@
         <form action='/change_config' class="config" method="post">
             <div class="field">
                 <label for="number_of_tweets_searched">Number of tweets searched: </label>
-                <input type="number" id="number_of_tweets_searched" name="number_of_tweets_searched"><br>
+                <input type="number" id="number_of_tweets_searched" name="number_of_tweets_searched" value={{number_of_tweets_searched}}><br>
             </div>
             <div class="field">
                 <label for="number_of_tweets_per_page">Number of tweets per page: </label>
-                <input type="number" id="number_of_tweets_per_page" name="number_of_tweets_per_page"><br>
+                <input type="number" id="number_of_tweets_per_page" name="number_of_tweets_per_page" value={{number_of_tweets_per_page}}><br>
+            </div>
+            <div class="field">
+                <labael for="theme">Tweets theme: </labael>
+                <input type="text" id="theme" name="theme" value={{theme}}>
+            </div>
+            <div class="field">
+                <label for="max_tweets">Max number of tweets in the database: </label>
+                <input type="number" id="max_tweets" name="max_tweets" value={{numberoftweetsindatabase}}>
             </div>
             <div class="field">
                 <input type="submit" id="submit" name="submit" value="submit">

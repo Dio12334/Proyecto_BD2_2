@@ -178,4 +178,4 @@ def do_query(q, qns):
         json_line['score'] = rpta[n]
         jsondic.append(json_line)
     json_file.write(json.dumps(jsondic, indent=6, ensure_ascii=False))
-    return
+    return len(rpta)

@@ -1,4 +1,5 @@
 <head>
+<title>Twitter cosine search</title>
 <style>
 
 
@@ -30,6 +31,11 @@
     margin-bottom: 2px;
 }
 
+.config {
+    position: absolute;
+    top:0px;
+    right: 0px;
+}
 
 
 
@@ -38,25 +44,49 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
     <script type="text/javascript">
         
+        var getUrlParameter = function getUrlParameter(sParam) {
+        var sPageURL = window.location.search.substring(1),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
 
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return typeof sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+            }
+        }
+        return false;
+        };
+
+
+        
+        
         $.getJSON("/requestjson", function(data){
-        for (var i = 0, len = data.length; i < len; i++) {
+            var number_of_content_per_page = parseInt(document.getElementById("nocpp").innerHTML);
+            var current_page = parseInt(document.getElementById("page").innerHTML);
+            var tweets_result = "<center>";
+        for (var i = number_of_content_per_page*current_page, len = number_of_content_per_page*(current_page+1); i < len; i++) {
             var datax = data[i]
-            $('body').append("<center> <div class=\"tweet\"> <div class=\"text\">@" + datax.username + "</div> <div class=\"text\">" + datax.content + "</div> <div class=\"text\">" + datax.date.substr(0,16) +  "</div> </div> </center>"); 
+            tweets_result = tweets_result + "<div class=\"tweet\"> <div class=\"text\">@" + datax.username + "</div> <div class=\"text\">" + datax.content + "</div> <div class=\"text\">" + datax.date.substr(0,16) +  "</div> </div>"; 
         }      
+            tweets_result = tweets_result + "</center>";
+            $('body').append(tweets_result);
         }).fail(function(a,b,c){
             alert(a + " " + b + " " + c)
         });
         
         $( document ).ready(function() {
             var number_of_pages = parseFloat(document.getElementById("nop").innerHTML);
-            console.log(number_of_pages);
-            $('body').append("<div>");
+            var page = window.location.origin + "/search?query=" + getUrlParameter("query") + "&page=";
+            var result = "<center> ";
             for (var i = 0, len=number_of_pages; i < Math.ceil(number_of_pages); i++){
-                $('body').append(i);
-                $('body').append(" ");
+                result = result + "<a href="+page+String(i)+">"+i+"</a>";
+                result = result + " ";
             }
-            $('body').append("</div>");
+            result = result + " </center>";
+            $('body').append(result);
         });
         
        
@@ -66,6 +96,9 @@
 
 
 <body>
+    <a href="/config" class = config>
+        <img src="/static/images/config.png" width="50" height="50">
+    </a>
     <div>
         <center>
             <img width="100" height="100" src="/static/images/twitter.png">
@@ -79,7 +112,9 @@
 
         </center>  
     </div>   
-    <var id="nop"  hidden>{{number_of_pages}}</var>
+    <var id="nop"hidden>{{number_of_pages}}</var>
+    <var id="nocpp" hidden>{{content_per_page}}</var>
+    <var id="page" hidden>{{page}}</var>
 </body>
 
 
